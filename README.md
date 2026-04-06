@@ -1,2 +1,18 @@
-# er-diagram-designs
-A collection of ER diagram designs created for database modeling assignments.  This repository includes multiple real-world scenarios .Each diagram is designed with proper entities, relationships, cardinality, and normalization principles.
+# ER Diagram Designs
+
+This repository contains ER diagram designs for different database systems.
+
+## Projects
+
+- Instagram Thrift Store Database
+- 
+- 
+
+Each project includes:
+- Entities and Attributes
+- Primary and Foreign Keys
+- Relationships and Cardinality
+- Junction Tables (for M:N relations)
+
+Tools Used:
+- Eraser
