@@ -1,0 +1,105 @@
+
+users[icon:user,color:blue]{
+  user_id serial pk
+  name varchar(100) not null
+  username varchar(50) unique not null
+  email varchar(100) unique not null
+  role enum['client','trainer']
+  created_at timestamp
+}
+
+trainers[icon:user-check,color:green]{
+  trainer_id int pk fk
+  bio text
+  specialization varchar(100)
+}
+
+clients[icon:user,color:purple]{
+  client_id int pk fk
+  age int
+  gender varchar(20)
+  goals text
+}
+
+plans[icon:clipboard,color:orange]{
+  plan_id serial pk
+  trainer_id int fk
+  name varchar(100)
+  description text
+  duration int
+  price int
+}
+
+subscriptions[icon:repeat,color:red]{
+  subscription_id serial pk
+  client_id int fk
+  plan_id int fk
+  start_date date
+  end_date date
+  status varchar(50)
+}
+
+sessions[icon:video,color:pink]{
+  session_id serial pk
+  trainer_id int fk
+  client_id int fk
+  session_date timestamp
+  session_type enum['consultation','live','followup']
+  status varchar(50)
+}
+
+checkins[icon:activity,color:yellow]{
+  checkin_id serial pk
+  client_id int fk
+  checkin_date date
+  weight float
+  notes text
+}
+
+progress_details[icon:bar-chart,color:gray]{
+  progress_id serial pk
+  checkin_id int fk
+  chest float
+  waist float
+  arms float
+  body_fat float
+}
+
+trainer_notes[icon:file-text,color:brown]{
+  note_id serial pk
+  trainer_id int fk
+  client_id int fk
+  checkin_id int fk
+  note_text text
+}
+
+payments[icon:credit-card,color:black]{
+  payment_id serial pk
+  subscription_id int fk
+  amount int
+  payment_date timestamp
+  payment_method varchar(50)
+  status varchar(50)
+}
+
+
+users.user_id - trainers.trainer_id
+users.user_id - clients.client_id
+
+trainers.trainer_id < plans.trainer_id
+
+clients.client_id < subscriptions.client_id
+plans.plan_id < subscriptions.plan_id
+
+trainers.trainer_id < sessions.trainer_id
+clients.client_id < sessions.client_id
+
+clients.client_id < checkins.client_id
+
+checkins.checkin_id - progress_details.checkin_id
+
+trainers.trainer_id < trainer_notes.trainer_id
+clients.client_id < trainer_notes.client_id
+checkins.checkin_id < trainer_notes.checkin_id
+
+subscriptions.subscription_id < payments.subscription_id
