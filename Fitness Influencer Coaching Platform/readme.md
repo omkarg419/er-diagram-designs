@@ -21,4 +21,3 @@ Includes:
 - Proper cardinality (1:1, 1:M, M:N)
 - Junction table (Subscription) for resolving many-to-many relationship between clients and plans
 
-The design follows normalization principles (1NF, 2NF, 3NF) to ensure minimal redundancy, data consistency, and scalability for real-world usage.
