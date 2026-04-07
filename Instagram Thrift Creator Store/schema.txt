@@ -1,0 +1,72 @@
+
+title Instagram Thrift Creator Store
+
+// products, customers, orders, order items, payment, shipping, inventory
+
+customers[icon:user,color:blue]{
+  customer_id serial pk 
+  name varchar(50) not null
+  email varchar(100) unique not null
+  username varchar(50) unique not null
+  phone char(15) not null
+  address text not null
+  created_at Timestamp
+}
+
+products[icon:box,color:green]{
+  product_id serial pk
+  product_name varchar(100) not null
+  category enum['thrift','handmade']
+  size varchar(20)
+  color varchar(50)
+  condition varchar(50) 
+  price int not null
+  created_at Timestamp
+}
+
+orders[icon:shopping-cart ,color:orange]{
+  order_id serial pk
+  customer_id int fk
+  total_amount int
+}
+order_items[icon:list,color:purple]{
+  order_item_id serial pk
+  order_id int fk
+  product_id int fk
+  quantity int not null
+}
+
+payments[icon:credit-card,color:red]{
+  payment_id serial pk
+  order_id int fk
+  payment_method varchar(50)
+  payment_status varchar(50)
+  payment_date timestamp
+}
+
+shipments[icon:truck,color:pink]{
+  shipment_id serial pk
+  order_id int fk
+  shipping_status varchar(50)
+  tracking_number varchar(100)
+  delivery_date timestamp
+}
+inventory[icon:archive,color:gray]{
+  inventory_id serial pk
+  product_id int fk
+  stock_available int not null
+  last_updated timestamp
+}
+
+
+customers.customer_id < orders.customer_id
+
+orders.order_id < order_items.order_id
+
+products.product_id < order_items.product_id
+
+orders.order_id - payments.order_id
+
+orders.order_id - shipments.order_id
+
+products.product_id - inventory.product_id
