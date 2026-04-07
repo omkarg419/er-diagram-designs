@@ -5,7 +5,7 @@ This repository contains ER diagram designs for different database systems.
 ## Projects
 
 - Instagram Thrift Store Database
-- 
+- Fitness Influencer Coaching Platform
 - 
 
 Each project includes:
