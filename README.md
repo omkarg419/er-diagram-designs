@@ -6,7 +6,7 @@ This repository contains ER diagram designs for different database systems.
 
 - Instagram Thrift Store Database
 - Fitness Influencer Coaching Platform
-- 
+- Clinic Appointment and Diagnostics Platform
 
 Each project includes:
 - Entities and Attributes
