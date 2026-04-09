@@ -1,0 +1,66 @@
+vehicles[icontruck,colorblue]{
+  vehicle_id serial pk
+  vehicle_number varchar(20) unique not null
+  vehicle_category_id int fk
+  owner_name varchar(100)
+  created_at timestamp
+}
+
+vehicle_categories[icontag,colorcyan]{
+  vehicle_category_id serial pk
+  category_name varchar(50)   Bike, Car, SUV, EV
+}
+
+parking_zones[iconmap,colorgreen]{
+  zone_id serial pk
+  zone_name varchar(50)
+  level_number int
+}
+
+spot_categories[iconstar,coloryellow]{
+  spot_category_id serial pk
+  category_name varchar(50)   General, VIP, Staff, Exhibitor, EV
+}
+
+parking_spots[icongrid,colororange]{
+  spot_id serial pk
+  zone_id int fk
+  spot_category_id int fk
+  spot_number varchar(20)
+  is_available boolean
+}
+
+parking_sessions[iconclock,colorred]{
+  session_id serial pk
+  vehicle_id int fk
+  spot_id int fk
+  entry_time timestamp
+  exit_time timestamp
+  status enum['ACTIVE','COMPLETED']
+}
+
+parking_tickets[iconfile-text,colorpurple]{
+  ticket_id serial pk
+  session_id int fk
+  issue_time timestamp
+}
+
+payments[iconcredit-card,colorblack]{
+  payment_id serial pk
+  session_id int fk
+  amount decimal
+  payment_method enum['UPI','CARD','CASH']
+  payment_status enum['PENDING','SUCCESS','FAILED']
+  payment_time timestamp
+}
+
+vehicle_categories.vehicle_category_id  vehicles.vehicle_category_id
+
+vehicles.vehicle_id  parking_sessions.vehicle_id
+parking_spots.spot_id  parking_sessions.spot_id
+
+parking_zones.zone_id  parking_spots.zone_id
+spot_categories.spot_category_id  parking_spots.spot_category_id
+
+parking_sessions.session_id - parking_tickets.session_id
+parking_sessions.session_id - payments.session_id
