@@ -1,4 +1,4 @@
-# 🏢 LiftGrid Smart Elevator Control System ER Diagram
+# 🏢 Smart Elevator Control System ER Diagram
 
 This ER diagram models a scalable infrastructure management system used by LiftGrid Systems to control and monitor elevators across large commercial buildings such as corporate towers, malls, airports, hospitals, and residential complexes.
 
